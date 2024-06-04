@@ -63,7 +63,7 @@ cnn_model = tf.keras.Sequential([
 # Implement early stopping callback
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 cnn_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-history = cnn_model.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_test, y_test), callbacks=[early_stopping])
+history = cnn_model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test), callbacks=[early_stopping])
 
 # Evaluate CNN model
 cnn_loss, cnn_accuracy = cnn_model.evaluate(X_test, y_test)
@@ -208,7 +208,6 @@ def plot_confusion_matrix(cm, labels, model_name):
 plot_confusion_matrix(svm_cm, ['uninfected', 'infected'], 'SVM')
 plot_confusion_matrix(cnn_cm, ['uninfected', 'infected'], 'CNN')
 plot_confusion_matrix(rf_cm, ['uninfected', 'infected'], 'RF')
-plot_confusion_matrix(xgb_cm, ['uninfected', 'infected'], 'XGBoost')
 plot_confusion_matrix(confusion_matrix(y_test, stacked_pred), ['uninfected', 'infected'], 'Stacked Fusion')
 plot_confusion_matrix(confusion_matrix(y_test, stacked_pred_svm_cnn), ['uninfected', 'infected'], 'Stacked Fusion (SVM + CNN)')
 plot_confusion_matrix(confusion_matrix(y_test, stacked_pred_svm_rf), ['uninfected', 'infected'], 'Stacked Fusion (SVM + RF)')
